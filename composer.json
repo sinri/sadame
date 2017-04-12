@@ -1,0 +1,12 @@
+{
+  "name": "sinri/sadame",
+  "description": "PHP Fundamental Data Structure and Algorithm Realization",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sinri Edogawa",
+      "email": "e.joshua.s.e@gmail.com"
+    }
+  ]
+}
