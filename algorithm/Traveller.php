@@ -6,8 +6,10 @@
  * Time: 14:11
  */
 
-namespace sinri\sadame\bin;
+namespace sinri\sadame\algorithm;
 
+
+use sinri\sadame\bin\MatrixGraph;
 
 abstract class Traveller
 {
@@ -19,7 +21,7 @@ abstract class Traveller
 
     public function __construct()
     {
-        $this->graph = new Graph();
+        $this->graph = new MatrixGraph();
         $this->walked = [];
         $this->currentNode = null;
         $this->target = null;

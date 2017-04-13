@@ -9,7 +9,7 @@
 namespace sinri\sadame\test;
 
 
-use sinri\sadame\bin\Traveller;
+use sinri\sadame\algorithm\Traveller;
 
 class TestTraveller extends Traveller
 {

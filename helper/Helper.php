@@ -6,7 +6,7 @@
  * Time: 13:59
  */
 
-namespace sinri\sadame\bin;
+namespace sinri\sadame\helper;
 
 
 class Helper

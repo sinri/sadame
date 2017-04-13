@@ -6,8 +6,11 @@
  * Time: 16:57
  */
 
-namespace sinri\sadame\bin;
+namespace sinri\sadame\algorithm;
 
+
+use sinri\sadame\bin\MatrixGraph;
+use sinri\sadame\interfaces\Node;
 
 class Dijkstra
 {
@@ -15,7 +18,7 @@ class Dijkstra
 
     public function __construct()
     {
-        $this->graph = new Graph();
+        $this->graph = new MatrixGraph();
     }
 
     public function go($s, $t)
@@ -28,8 +31,8 @@ class Dijkstra
         //0-1: set distance, s as 0, others as -1
         //0-2: create Unknown set
         foreach ($this->graph->getNodes() as $node) {
-            $D[$node->name] = PHP_INT_MAX;
-            $U[$node->name] = $node->name;
+            $D[$node->getName()] = PHP_INT_MAX;
+            $U[$node->getName()] = $node->getName();
         }
         $D[$s] = 0;
 
@@ -41,9 +44,9 @@ class Dijkstra
             $paths = $this->graph->getPathListSince($min_node_name);
             if (!empty($paths)) {
                 foreach ($paths as $path) {
-                    if ($D[$path->to] - $path->value > $D[$min_node_name]) {
-                        $D[$path->to] = $path->value + $D[$min_node_name];
-                        $P[$path->to] = $min_node_name;
+                    if ($D[$path->getTo()] - $path->getValue() > $D[$min_node_name]) {
+                        $D[$path->getTo()] = $path->getValue() + $D[$min_node_name];
+                        $P[$path->getTo()] = $min_node_name;
                     }
                 }
             }

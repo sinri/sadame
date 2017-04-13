@@ -9,12 +9,15 @@
 namespace sinri\sadame\bin;
 
 
-class Graph
+use sinri\sadame\helper\Helper;
+use sinri\sadame\interfaces\Graph;
+
+class MatrixGraph implements Graph
 {
-    const PATH_LACK = null;
-    const PATH_DIRECTED = 1;
-    const PATH_UNDIRECTED = 0;
-    const PATH_REVERSED = -1;
+//    const PATH_LACK = null;
+//    const PATH_DIRECTED = 1;
+//    const PATH_UNDIRECTED = 0;
+//    const PATH_REVERSED = -1;
     protected $nodes = [];
     protected $paths = [];
 
@@ -45,6 +48,23 @@ class Graph
      */
     public function getPaths()
     {
+        $matrix = $this->paths;
+        if (empty($matrix)) return [];
+        $paths = [];
+        foreach ($matrix as $f => $v) {
+            if (empty($v)) continue;
+            foreach ($v as $t => $p) {
+                $paths[] = $p;
+            }
+        }
+        return $paths;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMatrixPaths()
+    {
         return $this->paths;
     }
 
@@ -58,19 +78,19 @@ class Graph
 
     public function addNode($node_name, $node_value = 0)
     {
-        $this->nodes[$node_name] = new Node($node_name, $node_value);
+        $this->nodes[$node_name] = new StandardNode($node_name, $node_value);
     }
 
     public function addPath($first_node_name, $second_node_name, $path_value = 0, $direct = self::PATH_DIRECTED)
     {
         if (!$this->hasNode($first_node_name)) {
-            throw new \Exception("Node not exists: " . $first_node_name);
+            throw new \Exception("StandardNode not exists: " . $first_node_name);
         }
         if (!$this->hasNode($second_node_name)) {
-            throw new \Exception("Node not exists: " . $second_node_name);
+            throw new \Exception("StandardNode not exists: " . $second_node_name);
         }
         if ($direct === self::PATH_DIRECTED || $direct === self::PATH_UNDIRECTED) {
-            $path = new Path(
+            $path = new StandardPath(
                 $first_node_name,
                 $second_node_name,
                 $path_value
@@ -78,7 +98,7 @@ class Graph
             Helper::setMatrixCell($this->paths, $first_node_name, $second_node_name, $path);
         }
         if ($direct === self::PATH_REVERSED || $direct === self::PATH_UNDIRECTED) {
-            $path = new Path(
+            $path = new StandardPath(
                 $second_node_name,
                 $first_node_name,
                 $path_value

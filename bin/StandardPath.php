@@ -9,7 +9,9 @@
 namespace sinri\sadame\bin;
 
 
-class Path
+use sinri\sadame\interfaces\Path;
+
+class StandardPath implements Path
 {
     private $from;
     private $to;
@@ -82,5 +84,10 @@ class Path
             default:
                 return null;
         }
+    }
+
+    public function __toString()
+    {
+        return "From [{$this->from}] To [{$this->to}] Value: " . json_encode($this->value);
     }
 }

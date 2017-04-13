@@ -9,7 +9,9 @@
 namespace sinri\sadame\bin;
 
 
-class Node
+use sinri\sadame\interfaces\Node;
+
+class StandardNode implements Node
 {
     private $name;
     private $value;
@@ -62,5 +64,10 @@ class Node
             default:
                 return null;
         }
+    }
+
+    public function __toString()
+    {
+        return "Node [{$this->name}] with value: " . json_encode($this->value);
     }
 }
